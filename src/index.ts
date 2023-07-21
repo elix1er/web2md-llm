@@ -55,12 +55,16 @@ class Web2Md extends Command {
 ---
 ${markdown}
     `
-    // Output Document
-    let outFile = flags.name || `${today}-${article.title}.md`
 
-    this.log(`Writing to file ${outFile}`);
-    writeFileSync(outFile, output, "utf-8");
-
+    if(flags.name) {
+      // Output Document
+      let outFile = flags.name || `${today}-${article.title}.md`
+      this.log(`Writing to file ${outFile}`);
+      writeFileSync(outFile, output, "utf-8");
+    } else {
+      // STDOUT MOFOS
+      process.stdout.write(output);
+    }
   }
 }
 
